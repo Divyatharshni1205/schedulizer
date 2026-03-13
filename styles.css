@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: linear-gradient(135deg, #ffffff, #040404);
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    
+}
+
+.container {
+    max-width: 1300px;
+    margin: 20px auto;
+    background: rgba(174, 194, 203, 1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-left: 270px;
+    margin-right: 20px;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.class-block, .subject-block {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.time-slot {
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.time-slot.blocked {
+    background-color: #ff4444;
+    color: white;
+}
+
+.schedule-section {
+    margin-top: 30px;
+    left: 25%;
+    padding: 20px;
+    border-top: 2px solid #eee;
+    
+}
+
+.schedule-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #244d69;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #002d42;
+}
+
+.remove-btn {
+    background-color: #f44336;
+}
+
+.remove-btn:hover {
+    background-color: #da190b;
+}
+.sidebar {
+    width: 200px;
+    background: #333;
+    color: white;
+    height: 100%;
+    padding: 20px;
+    margin: 0;
+    left: 0;
+    top:0;
+    position: fixed;
+  }
+
+  .sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+  }
+  .sidebar ul li {
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+.sidebar ul li:hover,
+  .sidebar ul li.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid white;
+  }
+
+  .sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+  

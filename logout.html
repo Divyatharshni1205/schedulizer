@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+    }
+
+    .logout-container {
+      background: rgba(40, 40, 50, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      flex: 1;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .logout-btn:hover {
+      background: #c82333;
+    }
+
+    .back-btn {
+      background: #007bff;
+      color: white;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logout-container">
+    <h1>Are you sure you want to log out?</h1>
+    <p>You can always log in again.</p>
+    <div class="button-container">
+      <button class="logout-btn" onclick="logout()">Logout</button>
+      <button class="back-btn" onclick="goBack()">Go Back</button>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("username"); // Clear session
+      window.location.href = "login.html"; // Redirect to login page
+    }
+
+    function goBack() {
+      window.location.href = "home.html"; // Redirect to home page
+    }
+  </script>
+
+</body>
+</html>

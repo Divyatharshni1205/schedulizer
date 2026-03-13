@@ -1,0 +1,138 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1b1b1f, #2b2b35);
+    color: #ddd;
+}
+
+.nav-container {
+    padding: 20px;
+    text-align: center;
+    background: rgba(40, 40, 50, 0.95);
+    margin-bottom: 30px;
+}
+
+.container {
+    background: rgba(40, 40, 50, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.nav-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background: #0056b3;
+}
+
+#timetableSection, #leaveSection {
+    display: none;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #bbb;
+}
+
+input, select, textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    outline: none;
+    background: #222;
+    color: #ddd;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+button {
+    display: block;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.cancel-button {
+    background: #dc3545;
+}
+
+.cancel-button:hover {
+    background: #c82333;
+}
+
+.schedule-section {
+    margin: 20px 0;
+    background: rgba(40, 40, 50, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.schedule-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.schedule-section th,
+.schedule-section td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #444;
+}
+
+.schedule-section th {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+.blocked {
+    background-color: #ffcccc !important;
+    color: #ff0000;
+}
+
+.lab-slot {
+    background-color: #e6f3ff;
+}
+
+.lunch-slot {
+    background-color: #fff2cc;
+}
+
+.class-block, .subject-block {
+    background: rgba(30, 30, 40, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+}

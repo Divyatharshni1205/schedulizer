@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Scheduler</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #040404);
+      color: #ddd;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    form {
+      background: rgba(40, 40, 50, 0.95);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      width: 70%;
+      max-width: 600px;
+      align-items: center;
+      justify-content: center;
+      margin-left: 270px;
+      margin-right: 20%;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    table {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      border-collapse: collapse;
+      margin-top: 0px;
+      background: #282832;
+      color: white;
+      margin-left: 270px;
+      margin-right: 20px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+    }
+    th {
+      background: #007bff;
+    }
+    .list-container {
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      text-align: left;
+      background: rgba(40, 40, 50, 0.95);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);  
+      
+    }
+    .sidebar {
+        width: 200px;
+        background: #333;
+        color: white;
+        height: 100%;
+        padding: 20px;
+        margin: 0;
+        left: 0;
+        top:0;
+        position: fixed;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        text-align: left;
+        padding: 0;
+      }
+      .sidebar ul li {
+        padding: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: background 0.3s, border-color 0.3s;
+      }
+    .sidebar ul li:hover,
+      .sidebar ul li.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-left: 4px solid white;
+      }
+
+      .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        display: block;
+      }
+      .main {
+        margin-left: 250px;
+        padding: 20px;
+        flex: 1;
+        background: #c4c4ce;
+      }
+
+      .main h1 {
+        margin: auto;
+        font-size: 1.8rem;
+        color: #000000;
+      }
+
+      .content {
+        margin-top: 20px;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+      color: #1b1919;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SCHEDULIZER</h2>
+    <ul>
+      <li><a href="home.html">🏠 Home</a></li>
+      <li class="active"><a href="courseallocation.html">👩‍🏫 Course Allocation</a></li>
+      <li><a href="javas.html">📝 Timetable Inputs</a></li>
+      <li><a href="schedules.html">📅 Schedules</a></li>
+      <li><a href="leave-application.html">🛑 Staff Leave Application</a></li>
+      <li><a href="logout.html">🚪 Logout</a></li>
+    </ul>
+  </div>
+  <h1>Course Scheduler</h1>
+  <form id="schedulerForm">
+    <h2>Add Staff</h2>
+    <input type="text" id="staffName" placeholder="Staff Name" required>
+    <input type="text" id="staffID" placeholder="Staff ID" required>
+    <input type="number" id="minHours" placeholder="Min Hours" required>
+    <input type="number" id="maxHours" placeholder="Max Hours" required>
+    <button type="button" onclick="addStaff()">Add Staff</button>
+    <div class="list-container" id="staffList"></div>
+    
+    <h2>Add Course</h2>
+    <input type="text" id="courseName" placeholder="Course Name" required>
+    <input type="number" id="courseHours" placeholder="Hours Per Week" required>
+    <button type="button" onclick="addCourse()">Add Course</button>
+    <div class="list-container" id="courseList"></div>
+    
+    <button type="button" onclick="allocateCourses()">Allocate Courses</button>
+    
+  </form>
+  
+  <h2>Course Allocation</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Hours</th>
+        <th>Assigned Staff</th>
+        <th>Staff ID</th>
+      </tr>
+    </thead>
+    <tbody id="allocationTable"></tbody>
+  </table>
+  
+  <h2>Staff Workload</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Staff Name</th>
+        <th>Staff ID</th>
+        <th>Total Hours Assigned</th>
+      </tr>
+    </thead>
+    <tbody id="workloadTable"></tbody>
+  </table>
+
+  <script>
+    let staffList = [];
+    let courseList = [];
+
+    function addStaff() {
+      let name = document.getElementById('staffName').value.trim();
+      let id = document.getElementById('staffID').value.trim();
+      let minHours = parseInt(document.getElementById('minHours').value);
+      let maxHours = parseInt(document.getElementById('maxHours').value);
+
+      if (!name || !id || isNaN(minHours) || isNaN(maxHours)) {
+        alert("Please fill in all fields correctly.");
+        return;
+      }
+
+      let exists = staffList.some(staff => staff.id === id);
+      if (exists) {
+        alert("Staff with this ID already exists.");
+        return;
+      }
+
+      let staff = { name, id, minHours, maxHours, assignedHours: 0, assignedCourses: [] };
+      staffList.push(staff);
+      updateStaffList();
+
+      // 🔹 Clear input fields after adding staff
+      document.getElementById('staffName').value = "";
+      document.getElementById('staffID').value = "";
+      document.getElementById('minHours').value = "";
+      document.getElementById('maxHours').value = "";
+    }
+
+    function updateStaffList() {
+      let list = document.getElementById('staffList');
+      list.innerHTML = "";
+      staffList.forEach(staff => {
+        list.innerHTML += `<p>${staff.name} (ID: ${staff.id}) - Min: ${staff.minHours}, Max: ${staff.maxHours}</p>`;
+      });
+    }
+
+    function addCourse() {
+      let name = document.getElementById('courseName').value.trim();
+      let hours = parseInt(document.getElementById('courseHours').value);
+
+      if (!name || isNaN(hours)) {
+        alert("Please fill in all fields correctly.");
+        return;
+      }
+
+      let exists = courseList.some(course => course.name.toLowerCase() === name.toLowerCase());
+      if (exists) {
+        alert("This course already exists.");
+        return;
+      }
+
+      let course = { name, hours, assignedStaff: null, staffID: null };
+      courseList.push(course);
+      updateCourseList();
+
+      // 🔹 Clear input fields after adding course
+      document.getElementById('courseName').value = "";
+      document.getElementById('courseHours').value = "";
+    }
+
+    function updateCourseList() {
+      let list = document.getElementById('courseList');
+      list.innerHTML = "";
+      courseList.forEach(course => {
+        list.innerHTML += `<p>${course.name} - ${course.hours} hrs</p>`;
+      });
+    }
+
+    function allocateCourses() {
+      let staffIndex = 0;
+      document.getElementById('allocationTable').innerHTML = "";
+      document.getElementById('workloadTable').innerHTML = "";
+
+      courseList.forEach(course => {
+        let staff = staffList[staffIndex];
+        
+        staff.assignedCourses.push(course.name);
+        staff.assignedHours += course.hours;
+        course.assignedStaff = staff.name;
+        course.staffID = staff.id;
+
+        staffIndex = (staffIndex + 1) % staffList.length;
+      });
+
+      courseList.forEach(course => {
+        document.getElementById('allocationTable').innerHTML += `
+          <tr>
+            <td>${course.name}</td>
+            <td>${course.hours}</td>
+            <td>${course.assignedStaff}</td>
+            <td>${course.staffID}</td>
+          </tr>`;
+      });
+
+      staffList.forEach(staff => {
+        document.getElementById('workloadTable').innerHTML += `
+          <tr>
+            <td>${staff.name}</td>
+            <td>${staff.id}</td>
+            <td>${staff.assignedHours}</td>
+          </tr>`;
+      });
+    }
+    function goToHomePage() {
+      window.location.href = "home.html"; // Change to your actual homepage filename
+    }
+  </script>
+</body>
+</html>

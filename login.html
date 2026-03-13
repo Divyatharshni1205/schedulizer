@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated Background */
+    .background-animation span {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: move 8s infinite linear;
+    }
+
+    @keyframes move {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* Login Box */
+    .login-container {
+      background: rgba(40, 40, 50, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      color: #f4f4f4;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #f4f4f4;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #bbb;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: #222;
+      color: #ddd;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    input:focus {
+      background: #333;
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: right;
+      margin-bottom: 15px;
+    }
+
+    .forgot-password a {
+      color: #007bff;
+      font-size: 14px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-animation">
+    <span style="top: 10%; left: 15%; animation-duration: 6s;"></span>
+    <span style="top: 30%; left: 60%; animation-duration: 10s;"></span>
+    <span style="top: 70%; left: 30%; animation-duration: 8s;"></span>
+    <span style="top: 90%; left: 80%; animation-duration: 7s;"></span>
+  </div>
+
+  <div class="login-container">
+    <h1>SCHEDULIZER</h1>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="username">Enter Your Name:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Enter Your Password:</label>
+      <input type="password" id="password" name="password" required>
+      <div class="forgot-password">
+        <a href="#">Forgot Password?</a>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      let username = document.getElementById("username").value.trim();
+      
+      if (username === "") {
+        alert("Please enter your name.");
+      } else {
+        localStorage.setItem("username", username); // Store the username
+        window.location.href = "home.html"; // Redirect to homepage
+      }
+    });
+
+    // Auto-fill username if stored
+    window.onload = function() {
+      let savedUsername = localStorage.getItem("username");
+      if (savedUsername) {
+        document.getElementById("username").value = savedUsername;
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduled Subjects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #a1a1a3, #cdcde3);
+      color: #ddd;
+      padding: 20px;
+      display: flex;
+    }
+
+    h1 {
+      color: #f4f4f4;
+    }
+
+    table {
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+      border-collapse: collapse;
+      background: #bfbfca;
+      border-radius: 8px;
+      overflow: hidden;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .table-header {
+      background-color: #15375d;
+      color: white;
+      font-weight: bold;
+    }
+
+    .no-data {
+      color: #bbb;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #28a745;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+    /*body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+      }*/
+
+      /* Sidebar */
+      .sidebar {
+        width: 200px;
+        background: #333;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+        left: 0;
+        top: 0;
+        position: fixed;
+      }
+
+      .sidebar h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        text-align: left;
+        padding: 0;
+      }
+      .sidebar ul li {
+        padding: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: background 0.3s, border-color 0.3s;
+      }
+    .sidebar ul li:hover,
+      .sidebar ul li.active {
+        background: rgba(255, 255, 255, 0.2);
+        border-left: 4px solid white;
+      }
+
+      .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        display: block;
+      }
+
+      /* Main Content */
+      .main {
+        margin-left: 250px;
+        padding: 20px;
+        flex: 1;
+        background: #f9f9fb;
+      }
+
+      .main h1 {
+        margin: auto;
+        font-size: 1.8rem;
+        color: #333;
+      }
+
+      .content {
+        margin-top: 20px;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>SCHEDULIZER</h2>
+    <ul>
+      <li><a href="home.html">🏠 Home</a></li>
+      <li><a href="courseallocation.html">👩‍🏫 Course Allocation</a></li>
+      <li><a href="javas.html">📝 Timetable Inputs</a></li>
+      <li class="active"><a href="schedules.html">📅 Schedules</a></li>
+      <li><a href="leave-application.html">🛑 Staff Leave Application</a></li>
+      <li><a href="logout.html">🚪 Logout</a></li>
+
+    </ul>
+  </div>
+  <div class="main">
+  <h1>Scheduled Subjects</h1>
+  
+  <table id="scheduleTable">
+    <thead>
+      <tr>
+        <th class="table-header">Class Name</th>
+        <th class="table-header">Room Number</th>
+        <th class="table-header">Subject</th>
+        <th class="table-header">Code</th>
+        <th class="table-header">Credits</th>
+        <th class="table-header">Lab Hours</th>
+        <th class="table-header">Normal Hours</th>
+        <th class="table-header">Teacher</th>
+      </tr>
+    </thead>
+    <tbody id="scheduleBody">
+      <!-- Subjects will be inserted here dynamically -->
+    </tbody>
+  </table>
+
+  <p id="noDataMessage" class="no-data">No subjects added yet. Add subjects in the timetable input page.</p>
+
+
+  <script>
+    function loadSchedule() {
+      let storedData = localStorage.getItem("timetableData");
+      let scheduleBody = document.getElementById("scheduleBody");
+      let noDataMessage = document.getElementById("noDataMessage");
+
+      if (storedData) {
+        let timetableData = JSON.parse(storedData);
+        scheduleBody.innerHTML = "";
+
+        timetableData.forEach(classData => {
+          classData.subjects.forEach(subject => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${classData.className}</td>
+              <td>${classData.roomNumber}</td>
+              <td>${subject.subjectName}</td>
+              <td>${subject.subjectCode}</td>
+              <td>${subject.credits}</td>
+              <td>${subject.labHours}</td>
+              <td>${subject.normalHours}</td>
+              <td>${subject.teacherName}</td>
+            `;
+            scheduleBody.appendChild(row);
+          });
+        });
+
+        noDataMessage.style.display = "none";
+      } else {
+        noDataMessage.style.display = "block";
+      }
+    }
+
+    
+
+    window.onload = loadSchedule;
+  </script>
+</div>
+</body>
+</html>

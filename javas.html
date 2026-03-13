@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Scheduler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>SCHEDULIZER</h2>
+        <ul>
+          <li><a href="home.html">🏠 Home</a></li>
+          <li><a href="courseallocation.html">👩‍🏫 Course Allocation</a></li>
+          <li class="active"><a href="javas.html">📝 Timetable Inputs</a></li>
+          <li><a href="schedules.html">📅 Schedules</a></li>
+          <li><a href="leave-application.html">🛑 Staff Leave Application</a></li>
+          <li><a href="logout.html">🚪 Logout</a></li>
+        </ul>
+      </div>
+    
+    <div class="container">
+        <h1>Timetable Scheduler</h1>
+
+        <form id="timetableForm">
+            <h2>Enter Timetable Details</h2>
+
+            <label for="numLabs">Number of Lab Rooms:</label>
+            <input type="number" id="numLabs" name="numLabs" min="1" required>
+
+            <div id="classInputs"></div>
+
+            <div class="button-group">
+                <button type="button" onclick="addClass()">Add Class</button>
+                <button type="submit">Generate Timetable</button>
+
+            </div>
+        </form>
+    </div>
+
+    <div id="scheduleOutput" class="container">
+        <div id="classSchedules"></div>
+        <div id="teacherSchedules"></div>
+        <div id="labSchedules"></div>
+    </div>
+    
+
+    <script src="function1.js"></script>
+    
+</body>
+</html>
