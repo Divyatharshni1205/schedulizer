@@ -1,0 +1,2 @@
+# schedulizer
+Timetable generator project
